@@ -1,17 +1,18 @@
 package pokemon_battle;
+
 import java.util.HashMap;
 
 public class PokemonBattlerRunner {
 	// Row = Attack, Col = Defense
-	static final double[][] typesMultiplier = {
+	static final double[][] typesMultiplier = { 
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0, 1 }, // normal
-			{ 1, 0.5, 0.5, 1, 2, 2, 1, 1, 1, 1, 1, 2, 0.5, 1, 0.5}, // fire 
+			{ 1, 0.5, 0.5, 1, 2, 2, 1, 1, 1, 1, 1, 2, 0.5, 1, 0.5 }, // fire
 			{ 1, 2, 0.5, 1, 0.5, 1, 1, 1, 2, 1, 1, 1, 2, 1, 0.5 }, // water
 			{ 1, 1, 2, 0.5, 0.5, 1, 1, 1, 0, 2, 1, 1, 1, 1, 0.5 }, // electric
 			{ 1, 0.5, 2, 1, 0.5, 1, 1, 0.5, 2, 0.5, 1, 0.5, 2, 1, 0.5 }, // grass
 			{ 1, 1, 0.5, 1, 2, 0.5, 1, 1, 2, 2, 1, 1, 1, 1, 2 }, // ice
-			{ 2, 1, 1, 1, 1, 2, 1, 0.5, 1, 0.5, 0.5, 0.5, 2, 0, 1 }, // fighting 
-			{ 1, 1, 1, 1, 2, 1, 1, 0.5, 0.5, 1, 1, 2, 0.5, 0.5, 1 },  // poison
+			{ 2, 1, 1, 1, 1, 2, 1, 0.5, 1, 0.5, 0.5, 0.5, 2, 0, 1 }, // fighting
+			{ 1, 1, 1, 1, 2, 1, 1, 0.5, 0.5, 1, 1, 2, 0.5, 0.5, 1 }, // poison
 			{ 1, 2, 1, 2, 0.5, 1, 1, 2, 1, 0, 1, 0.5, 2, 1, 1 }, // ground
 			{ 1, 1, 1, 0.5, 2, 1, 2, 1, 1, 1, 1, 2, 0.5, 1, 1 }, // flying
 			{ 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 0.5, 1, 1, 1, 1 }, // psychic
@@ -19,16 +20,23 @@ public class PokemonBattlerRunner {
 			{ 1, 2, 1, 1, 1, 2, 0.5, 1, 0.5, 2, 1, 2, 1, 1, 1 }, // rock
 			{ 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 2, 1 }, // ghost
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2 } // dragon
-	}; 
-	
+	};
+
 	public static void main(String[] args) {
 		HashMap<String, Integer> types = new HashMap<String, Integer>();
 		initTypes(types);
-		
+		FullRestore item1 = new FullRestore();
+		FullRestore item2 = new FullRestore();
+		Pokemon c1 = new Charizard();
+		Pokemon b1 = new Blastoise();
+		// each player gets 1 full restore
+		HumanPlayer readyPlayerOne = new HumanPlayer(c1, item1);
+		ComputerPlayer computerPlayer = new ComputerPlayer(b1, item2); 
 	}
-	
+
 	/**
 	 * Initializes our types to an index value that matches the types multiplier
+	 * 
 	 * @param types
 	 */
 	private static void initTypes(HashMap<String, Integer> types) {
@@ -48,5 +56,4 @@ public class PokemonBattlerRunner {
 		types.put("ghost", 13);
 		types.put("dragon", 14);
 	}
-
 }

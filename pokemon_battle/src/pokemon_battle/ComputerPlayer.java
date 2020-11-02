@@ -2,8 +2,8 @@ package pokemon_battle;
 
 public class ComputerPlayer extends Player{
 
-	public ComputerPlayer() {
-		// TODO Auto-generated constructor stub
+	public ComputerPlayer(Pokemon partner, Item item) {
+		super(partner, item);
 	}
 
 	@Override
@@ -23,5 +23,4 @@ public class ComputerPlayer extends Player{
 		// TODO Auto-generated method stub
 		
 	}
-
 }

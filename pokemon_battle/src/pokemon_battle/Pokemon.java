@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public abstract class Pokemon {
 	private String name;
-	private int hp, attack, defense, speed;
+	private int hp, currentHp, attack, defense, speed;
 	private String[] types;
 	private ArrayList<AttackMove>attackMoves;
 	private final static AttackMove struggle = new AttackMove("Struggle", "normal", 50, Integer.MAX_VALUE);
@@ -12,6 +12,7 @@ public abstract class Pokemon {
 	public Pokemon(String name, int hp, int attack, int defense, int speed, String[] types, ArrayList<AttackMove> attackMoves) {
 		this.name = name;
 		this.hp = hp;
+		this.currentHp = hp;
 		this.attack = attack;
 		this.defense = defense;
 		this.speed = speed;
@@ -37,7 +38,7 @@ public abstract class Pokemon {
 		int powerMultiplier = 1;
 		String[] targetPokemonTypes = other.getTypes(); // at most, a pokemon can have 2 types
 		int targetPokemonDefense = other.getDefense();
-		int targetPokemonHealth = other.getHP();
+		int targetPokemonHealth = other.getCurrentHP();
 		
 		// first calculate the multiplier derived by move attack type vs the target pokemon's types
 		for(int i = 0; i < targetPokemonTypes.length; i++) {
@@ -86,10 +87,18 @@ public abstract class Pokemon {
 	}
 	
 	/**
-	 * Gets the HP of the pokemon
+	 * Gets the current HP of the pokemon
+	 * @return currentHp
+	 */
+	public int getCurrentHP() {
+		return currentHp;
+	}
+	
+	/**
+	 * Gets the initial HP of the pokemon
 	 * @return hp
 	 */
-	public int getHP() {
+	public int getMaxHP() {
 		return hp;
 	}
 	
@@ -122,7 +131,7 @@ public abstract class Pokemon {
 	 * @param newHp
 	 */
 	public void setHp(int newHp) {
-		hp = newHp;
+		currentHp = newHp;
 	}
 	
 	/**
