@@ -3,14 +3,15 @@ import java.util.ArrayList;
 
 public abstract class Pokemon {
 	private String name;
-	private int hp, attack, defense;
+	private int hp, attack, defense, speed;
 	private ArrayList<String> types;
 	
-	public Pokemon(String name, int hp, int attack, int defense, ArrayList<String> types) {
+	public Pokemon(String name, int hp, int attack, int defense, int speed, ArrayList<String> types) {
 		this.name = name;
 		this.hp = hp;
 		this.attack = attack;
 		this.defense = defense;
+		this.speed = speed;
 		this.types = types;
 	}
 	
