@@ -5,14 +5,16 @@ public abstract class Pokemon {
 	private String name;
 	private int hp, attack, defense, speed;
 	private ArrayList<String> types;
+	private ArrayList<AttackMove>attackMoves;
 	
-	public Pokemon(String name, int hp, int attack, int defense, int speed, ArrayList<String> types) {
+	public Pokemon(String name, int hp, int attack, int defense, int speed, ArrayList<String> types, ArrayList<AttackMove> attackMoves) {
 		this.name = name;
 		this.hp = hp;
 		this.attack = attack;
 		this.defense = defense;
 		this.speed = speed;
 		this.types = types;
+		this.attackMoves = attackMoves;
 	}
 	
 	public abstract void attack(Pokemon other);
@@ -31,16 +33,39 @@ public abstract class Pokemon {
 	 * @return types
 	 */
 	public ArrayList<String> getTypes() {
-		return this.types;
+		return types;
 	}
 	
 	/**
-	 * Gets the stats of the pokemon in the form of an array [hp, sttack, defense];
-	 * @return stats[hp, attack, defense];
+	 * Gets the HP of the pokemon
+	 * @return hp
 	 */
-	public int[] getStats() {
-		int stats[] = { hp, attack, defense };
-		return stats;
+	public int getHP() {
+		return hp;
+	}
+	
+	/**
+	 * Gets the attack power of the pokemon
+	 * @return attack
+	 */
+	public int getAttack() {
+		return attack;
+	}
+	
+	/**
+	 * Gets the defense stat of the pokemon
+	 * @return defense
+	 */
+	public int getDefense() {
+		return defense;
+	}
+	
+	/**
+	 * Get the speed stat of the pokemon
+	 * @return speed
+	 */
+	public int getSpeed() {
+		return speed;
 	}
 	
 	/**
@@ -49,5 +74,12 @@ public abstract class Pokemon {
 	 */
 	public void setHp(int newHp) {
 		hp = newHp;
+	}
+	
+	/**
+	 * @return a list of the AttackMoves
+	 */
+	public ArrayList<AttackMove> getAttackMoves() {
+		return attackMoves;
 	}
 }

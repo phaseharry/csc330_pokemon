@@ -2,7 +2,6 @@ package pokemon_battle;
 import java.util.HashMap;
 
 public class PokemonBattlerRunner {
-	
 	// Row = Attack, Col = Defense
 	static final double[][] typesMultiplier = {
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0, 1 }, // normal
@@ -25,9 +24,7 @@ public class PokemonBattlerRunner {
 	public static void main(String[] args) {
 		HashMap<String, Integer> types = new HashMap<String, Integer>();
 		initTypes(types);
-		for (String i : types.keySet()) {
-		  System.out.println("key: " + i + " value: " + types.get(i));
-		}
+		
 	}
 	
 	/**
