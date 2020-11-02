@@ -41,4 +41,12 @@ public abstract class Pokemon {
 		int stats[] = { hp, attack, defense };
 		return stats;
 	}
+	
+	/**
+	 * Sets the hp field to a newHp data value for when this pokemon takes an attack
+	 * @param newHp
+	 */
+	public void setHp(int newHp) {
+		hp = newHp;
+	}
 }
