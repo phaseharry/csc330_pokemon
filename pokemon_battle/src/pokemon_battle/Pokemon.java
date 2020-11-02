@@ -4,10 +4,11 @@ import java.util.ArrayList;
 public abstract class Pokemon {
 	private String name;
 	private int hp, attack, defense, speed;
-	private ArrayList<String> types;
+	private String[] types;
 	private ArrayList<AttackMove>attackMoves;
+	private final static AttackMove struggle = new AttackMove("Struggle", "normal", 50, Integer.MAX_VALUE);
 	
-	public Pokemon(String name, int hp, int attack, int defense, int speed, ArrayList<String> types, ArrayList<AttackMove> attackMoves) {
+	public Pokemon(String name, int hp, int attack, int defense, int speed, String[] types, ArrayList<AttackMove> attackMoves) {
 		this.name = name;
 		this.hp = hp;
 		this.attack = attack;
@@ -17,7 +18,7 @@ public abstract class Pokemon {
 		this.attackMoves = attackMoves;
 	}
 	
-	public abstract void attack(Pokemon other);
+	public abstract void attack(Pokemon other, double[][]typesMultiplier);
 	public abstract void speak();
 	
 	/**
@@ -32,7 +33,7 @@ public abstract class Pokemon {
 	 * Gets the types of the Pokemon
 	 * @return types
 	 */
-	public ArrayList<String> getTypes() {
+	public String[] getTypes() {
 		return types;
 	}
 	
@@ -81,5 +82,14 @@ public abstract class Pokemon {
 	 */
 	public ArrayList<AttackMove> getAttackMoves() {
 		return attackMoves;
+	}
+	
+	/**
+	 * A getting for attack move struggle for a pokemon to use when they are out of PP 
+	 * for their other attack moves
+	 * @return struggle
+	 */
+	public AttackMove getStruggle() {
+		return struggle;
 	}
 }
