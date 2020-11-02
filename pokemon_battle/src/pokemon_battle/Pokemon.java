@@ -5,9 +5,8 @@ public abstract class Pokemon {
 	private String name;
 	private int hp, attack, defense;
 	private ArrayList<String> types;
-	private ArrayList
 	
-	public Pokemon(String name, int hp, int attack, int defense, String[] types) {
+	public Pokemon(String name, int hp, int attack, int defense, ArrayList<String> types) {
 		this.name = name;
 		this.hp = hp;
 		this.attack = attack;
@@ -30,7 +29,7 @@ public abstract class Pokemon {
 	 * Gets the types of the Pokemon
 	 * @return types
 	 */
-	public String[] getTypes() {
+	public ArrayList<String> getTypes() {
 		return this.types;
 	}
 	
