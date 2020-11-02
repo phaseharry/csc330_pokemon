@@ -22,26 +22,6 @@ public class Charizard extends Pokemon {
 	}
 	
 	@Override
-	public void attack(Pokemon other, double[][] typesMultiplier) {
-		ArrayList<AttackMove> moves = getAttackMoves();
-		// printing the moves for selection
-		for(int i = 0; i < moves.size(); i++) {
-			AttackMove currentMove = moves.get(i);
-			String attackName = currentMove.getName();
-			String type = currentMove.getType();
-			int power = currentMove.getAttackPower();
-			int pp = currentMove.getPP();
-			System.out.println(attackName + ", Type: " + type + ", Power: " + power + ", PP: " + pp);
-		}
-		
-		double powerMultiplier = 1;
-		boolean moveCompleted = false;
-		while(!moveCompleted) {
-			
-		}
-	}
-
-	@Override
 	public void speak() {
 		System.out.println("char char charrr");
 	}

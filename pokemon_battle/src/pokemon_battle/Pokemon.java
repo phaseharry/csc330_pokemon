@@ -1,5 +1,6 @@
 package pokemon_battle;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public abstract class Pokemon {
 	private String name;
@@ -18,8 +19,55 @@ public abstract class Pokemon {
 		this.attackMoves = attackMoves;
 	}
 	
-	public abstract void attack(Pokemon other, double[][]typesMultiplier);
 	public abstract void speak();
+	
+	/**
+	 * calculates the attack damage done to a target pokemon based on move's attack type & power vs 
+	 * target pokemon's types 
+	 * @param other - the target of the attack
+	 * @param typesMultiplier - the multiplier matrix used to determine the damage done
+	 * @param idxOfAttack - the index of the chosen attack
+	 * @return whether or not the answer was successful
+	 */
+	public boolean attack(Pokemon other, int idxOfAttack, double[][] typesMultiplier, HashMap<String, Integer> typesMap) {
+		if(idxOfAttack > 1 || idxOfAttack < 0) return false; // idx out of bounds (no attacks found)
+		AttackMove move = attackMoves.get(idxOfAttack);
+		if(move.getPP() <= 0) return false; // if no more pp, this move can't be done
+		
+		int powerMultiplier = 1;
+		String[] targetPokemonTypes = other.getTypes(); // at most, a pokemon can have 2 types
+		int targetPokemonDefense = other.getDefense();
+		int targetPokemonHealth = other.getHP();
+		
+		// first calculate the multiplier derived by move attack type vs the target pokemon's types
+		for(int i = 0; i < targetPokemonTypes.length; i++) {
+			int attackRow = typesMap.get(move.getType());
+			int defenseCol = typesMap.get(targetPokemonTypes[i]);
+			powerMultiplier *= typesMultiplier[attackRow][defenseCol];
+		}
+		
+		// multiply the multiplier to the moves attack power minus the target pokemon's defense to determine the total damage done
+		double damage = (powerMultiplier * move.getAttackPower()) - targetPokemonDefense;
+		other.setHp((int)(targetPokemonHealth - damage)); 
+		return true;
+	}
+	
+	/**
+	 * Used to display the attack moves available to this pokemon including its
+	 * power, pp, and its type
+	 */
+	public void printAttackMoves() {
+		ArrayList<AttackMove> moves = getAttackMoves();
+		// printing the moves for selection
+		for(int i = 0; i < moves.size(); i++) {
+			AttackMove currentMove = moves.get(i);
+			String attackName = currentMove.getName();
+			String type = currentMove.getType();
+			int power = currentMove.getAttackPower();
+			int pp = currentMove.getPP();
+			System.out.println(i + ") " + attackName + ", Type: " + type + ", Power: " + power + ", PP: " + pp);
+		}
+	}
 	
 	/**
 	 * Gets the name of the Pokemon
