@@ -1,5 +1,4 @@
 package pokemon_battle;
-
 import java.util.HashMap;
 
 public class PokemonBattlerRunner {
@@ -32,11 +31,30 @@ public class PokemonBattlerRunner {
 		// each player gets 1 full restore
 		HumanPlayer readyPlayerOne = new HumanPlayer(c1, item1);
 		ComputerPlayer computerPlayer = new ComputerPlayer(b1, item2); 
+		
+		// while either pokemon still have hitpoints, continue the battle
+		while(readyPlayerOne.getPokemon().getCurrentHP() > 0 && computerPlayer.getPokemon().getCurrentHP() > 0) {
+			int playerPokemonSpeed = readyPlayerOne.getPokemon().getSpeed();
+			int computerPokemonSpeed = computerPlayer.getPokemon().getSpeed();
+			// if player's pokemon is faster then player gets first move, else the computer gets first move
+			if(playerPokemonSpeed > computerPokemonSpeed) {
+				readyPlayerOne.run();
+				// if computer pokemon fainted during the attack, they don't get to attack
+				if(computerPlayer.getPokemon().getCurrentHP() <= 0) break; 
+				computerPlayer.run();
+			} else if(playerPokemonSpeed < computerPokemonSpeed) {
+				computerPlayer.run();
+				if(readyPlayerOne.getPokemon().getCurrentHP() <= 0) break;
+				readyPlayerOne.run();
+			} else {
+				// TODO: handle the speed equal case
+				break;
+			}
+		}
 	}
 
 	/**
 	 * Initializes our types to an index value that matches the types multiplier
-	 * 
 	 * @param types
 	 */
 	private static void initTypes(HashMap<String, Integer> types) {
