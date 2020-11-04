@@ -36,20 +36,27 @@ public class PokemonBattlerRunner {
 		while(readyPlayerOne.getPokemon().getCurrentHP() > 0 && computerPlayer.getPokemon().getCurrentHP() > 0) {
 			int playerPokemonSpeed = readyPlayerOne.getPokemon().getSpeed();
 			int computerPokemonSpeed = computerPlayer.getPokemon().getSpeed();
+			System.out.println("Your " + readyPlayerOne.getPokemon().getName() + "'s hp: " + readyPlayerOne.getPokemon().getCurrentHP());
+			System.out.println("Computer's " + computerPlayer.getPokemon().getName() + "'s hp: " + computerPlayer.getPokemon().getCurrentHP());
 			// if player's pokemon is faster then player gets first move, else the computer gets first move
 			if(playerPokemonSpeed > computerPokemonSpeed) {
-				readyPlayerOne.run();
+				readyPlayerOne.run(computerPlayer.getPokemon(), typesMultiplier, types);
 				// if computer pokemon fainted during the attack, they don't get to attack
 				if(computerPlayer.getPokemon().getCurrentHP() <= 0) break; 
-				computerPlayer.run();
+				computerPlayer.run(readyPlayerOne.getPokemon(), typesMultiplier, types);
 			} else if(playerPokemonSpeed < computerPokemonSpeed) {
-				computerPlayer.run();
+				computerPlayer.run(readyPlayerOne.getPokemon(), typesMultiplier, types);
 				if(readyPlayerOne.getPokemon().getCurrentHP() <= 0) break;
-				readyPlayerOne.run();
+				readyPlayerOne.run(computerPlayer.getPokemon(), typesMultiplier, types);
 			} else {
 				// TODO: handle the speed equal case
 				break;
 			}
+		}
+		if(readyPlayerOne.getPokemon().getCurrentHP() > 0) {
+			System.out.println("YOU WIN");
+		} else {
+			System.out.println("YOU LOSE");
 		}
 	}
 

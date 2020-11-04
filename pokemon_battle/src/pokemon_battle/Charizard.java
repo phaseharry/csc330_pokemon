@@ -5,7 +5,7 @@ public class Charizard extends Pokemon {
 	private final static String[] types = { "fire", "flying" };
 	
 	public Charizard() {
-		super("Charizard", 364, 340, 240, 300, types, initAttackMoves());
+		super("Charizard", 364, 340, 300, types, initAttackMoves());
 	}
 
 	/**

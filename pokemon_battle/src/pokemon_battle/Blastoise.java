@@ -5,7 +5,7 @@ public class Blastoise extends Pokemon {
 	private final static String[] types = { "water" };
 	
 	public Blastoise() {
-		super("Blastoise", 350, 310, 340, 240, types, initAttackMoves());
+		super("Blastoise", 350, 310, 240, types, initAttackMoves());
 	}
 
 	/**

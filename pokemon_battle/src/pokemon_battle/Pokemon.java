@@ -4,17 +4,16 @@ import java.util.HashMap;
 
 public abstract class Pokemon {
 	private String name;
-	private int hp, currentHp, attack, defense, speed;
+	private int hp, currentHp, attack, speed;
 	private String[] types;
 	private ArrayList<AttackMove>attackMoves;
 	private final static AttackMove struggle = new AttackMove("Struggle", "normal", 50, Integer.MAX_VALUE);
 	
-	public Pokemon(String name, int hp, int attack, int defense, int speed, String[] types, ArrayList<AttackMove> attackMoves) {
+	public Pokemon(String name, int hp, int attack, int speed, String[] types, ArrayList<AttackMove> attackMoves) {
 		this.name = name;
 		this.hp = hp;
 		this.currentHp = hp;
 		this.attack = attack;
-		this.defense = defense;
 		this.speed = speed;
 		this.types = types;
 		this.attackMoves = attackMoves;
@@ -34,10 +33,8 @@ public abstract class Pokemon {
 		if(idxOfAttack > 1 || idxOfAttack < 0) return false; // idx out of bounds (no attacks found)
 		AttackMove move = attackMoves.get(idxOfAttack);
 		if(move.getPP() <= 0) return false; // if no more pp, this move can't be done
-		
 		int powerMultiplier = 1;
 		String[] targetPokemonTypes = other.getTypes(); // at most, a pokemon can have 2 types
-		int targetPokemonDefense = other.getDefense();
 		int targetPokemonHealth = other.getCurrentHP();
 		
 		// first calculate the multiplier derived by move attack type vs the target pokemon's types
@@ -48,8 +45,10 @@ public abstract class Pokemon {
 		}
 		
 		// multiply the multiplier to the moves attack power minus the target pokemon's defense to determine the total damage done
-		double damage = (powerMultiplier * move.getAttackPower()) - targetPokemonDefense;
+		double damage = (powerMultiplier * move.getAttackPower());
 		other.setHp((int)(targetPokemonHealth - damage)); 
+		System.out.println(name + " used " + move.getName() + " on " + other.getName() + " and did " + damage);
+		System.out.println(other.getName() + "'s currentHp is " + other.getCurrentHP());
 		return true;
 	}
 	
@@ -108,14 +107,6 @@ public abstract class Pokemon {
 	 */
 	public int getAttack() {
 		return attack;
-	}
-	
-	/**
-	 * Gets the defense stat of the pokemon
-	 * @return defense
-	 */
-	public int getDefense() {
-		return defense;
 	}
 	
 	/**

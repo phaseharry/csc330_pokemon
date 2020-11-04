@@ -16,14 +16,17 @@ public class ComputerPlayer extends Player{
 	public Item getItem() {
 		return item;
 	}
-
+	
+	@Override
+	public void run() {}
 	public void run(Pokemon other, double[][] typesMultiplier, HashMap<String, Integer> typesMap) {
 		// if pokemon health is lower than 40% then player will use item
 		if(Math.floor(partner.getCurrentHP() / partner.getMaxHP()) < 0.4 && item != null) {
 			item.use(partner);
 			return;
 		}
-		int idxOfMaxDamageAttack = getMaxDamage(other, typesMultiplier, typesMap);
+//		int idxOfMaxDamageAttack = getMaxDamage(other, typesMultiplier, typesMap);
+		int idxOfMaxDamageAttack = 0;
 		if(idxOfMaxDamageAttack == -1) { // if none is found (probably due to PP == 0, then use struggle
 			// TODO: handle -1 case
 			partner.attack(other, idxOfMaxDamageAttack, typesMultiplier, typesMap);
@@ -42,7 +45,7 @@ public class ComputerPlayer extends Player{
 	public int getMaxDamage(Pokemon other, double[][] typesMultiplier, HashMap<String, Integer> typesMap) {
 		ArrayList<AttackMove> moves = partner.getAttackMoves();
 		int maxDamage = Integer.MIN_VALUE;
-		int idxOfAttackMove = -1;
+		int idxOfAttackMove = 0;
 		for(int i = 0; i < moves.size(); i++) {
 			AttackMove move = moves.get(i);
 			if(move.getPP() <= 0) continue; // don't bother calculating if PP is 0.
@@ -65,7 +68,4 @@ public class ComputerPlayer extends Player{
 		}
 		return idxOfAttackMove;
 	}
-
-	@Override
-	public void run() {}
 }
